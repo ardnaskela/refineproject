@@ -1,9 +1,4 @@
 FROM node:18-alpine AS base
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-CMD ["npm", "start"]
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -11,7 +6,7 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-npm ci;
+RUN npm ci;
 
 # Rebuild the source code only when needed
 FROM base AS builder
