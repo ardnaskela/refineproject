@@ -1,6 +1,6 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { ThemedTitle } from "@refinedev/antd";
 import { useLogin } from "@refinedev/core";
-import { ThemedTitle } from "@refinedev/mui";
+import { Button, Layout, Space, Typography } from "antd";
 
 import { useTranslate } from "@refinedev/core";
 import { GetServerSideProps } from "next";
@@ -13,49 +13,41 @@ export default function Login() {
   const t = useTranslate();
 
   return (
-    <Container
+    <Layout
       style={{
         height: "100vh",
-        display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Box
-        display="flex"
-        gap="36px"
-        justifyContent="center"
-        flexDirection="column"
-      >
+      <Space direction="vertical" align="center">
         <ThemedTitle
           collapsed={false}
           wrapperStyles={{
             fontSize: "22px",
-            justifyContent: "center",
           }}
           text="refine Project"
           icon={<AppIcon />}
         />
-
         <Button
-          style={{ width: "240px" }}
-          size="large"
-          variant="contained"
+          style={{ width: "240px", marginBottom: "32px" }}
+          type="primary"
+          size="middle"
           onClick={() => login({})}
         >
           {t("pages.login.signin", "Sign in")}
         </Button>
-        <Typography align="center" color={"text.secondary"} fontSize="12px">
+        <Typography.Text type="secondary">
           Powered by
           <img
             style={{ padding: "0 5px" }}
-            alt="Keycloak"
-            src="https://refine.ams3.cdn.digitaloceanspaces.com/superplate-auth-icons%2Fkeycloak.svg"
+            alt="Google"
+            src="https://refine.ams3.cdn.digitaloceanspaces.com/superplate-auth-icons%2Fgoogle.svg"
           />
-          Keycloak
-        </Typography>
-      </Box>
-    </Container>
+          Google
+        </Typography.Text>
+      </Space>
+    </Layout>
   );
 }
 

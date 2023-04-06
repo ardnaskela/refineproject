@@ -1,9 +1,9 @@
-import { MuiShowInferencer } from "@refinedev/inferencer/mui";
+import { AntdShowInferencer } from "@refinedev/inferencer/antd";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function CategoryShow() {
-  return <MuiShowInferencer />;
+  return <AntdShowInferencer />;
 }
 
 export const getServerSideProps: GetServerSideProps<{}> = async (context) => {

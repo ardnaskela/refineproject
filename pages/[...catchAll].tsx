@@ -1,4 +1,4 @@
-import { ErrorComponent } from "@refinedev/mui";
+import { ErrorComponent } from "@refinedev/antd";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 

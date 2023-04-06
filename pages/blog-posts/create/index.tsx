@@ -1,9 +1,9 @@
-import { MuiCreateInferencer } from "@refinedev/inferencer/mui";
+import { AntdCreateInferencer } from "@refinedev/inferencer/antd";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function BlogPostCreate() {
-  return <MuiCreateInferencer />;
+  return <AntdCreateInferencer />;
 }
 
 export const getServerSideProps: GetServerSideProps<{}> = async (context) => {

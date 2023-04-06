@@ -1,7 +1,6 @@
-import { useMediaQuery } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
-import { RefineThemes } from "@refinedev/mui";
-import { parseCookies, setCookie } from "nookies";
+import { RefineThemes } from "@refinedev/antd";
+import { ConfigProvider, theme } from "antd";
+import { parseCookies } from "nookies";
 import React, {
   createContext,
   PropsWithChildren,
@@ -11,7 +10,7 @@ import React, {
 
 type ColorModeContextType = {
   mode: string;
-  setMode: () => void;
+  setMode: (mode: string) => void;
 };
 
 export const ColorModeContext = createContext<ColorModeContextType>(
@@ -28,34 +27,38 @@ export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({
     setIsMounted(true);
   }, []);
 
-  const systemTheme = useMediaQuery(`(prefers-color-scheme: dark)`);
-
   useEffect(() => {
     if (isMounted) {
-      setMode(parseCookies()["theme"] || (systemTheme ? "dark" : "light"));
+      setMode(parseCookies()["theme"]);
     }
-  }, [isMounted, systemTheme]);
+  }, [isMounted]);
 
-  const toggleTheme = () => {
-    const nextTheme = mode === "light" ? "dark" : "light";
-
-    setMode(nextTheme);
-    setCookie(null, "theme", nextTheme);
+  const setColorMode = () => {
+    if (mode === "light") {
+      setMode("dark");
+    } else {
+      setMode("light");
+    }
   };
+
+  const { darkAlgorithm, defaultAlgorithm } = theme;
 
   return (
     <ColorModeContext.Provider
       value={{
-        setMode: toggleTheme,
+        setMode: setColorMode,
         mode,
       }}
     >
-      <ThemeProvider
-        // you can change the theme colors here. example: mode === "light" ? RefineThemes.Magenta : RefineThemes.MagentaDark
-        theme={mode === "light" ? RefineThemes.Blue : RefineThemes.BlueDark}
+      <ConfigProvider
+        // you can change the theme colors here. example: ...RefineThemes.Magenta,
+        theme={{
+          ...RefineThemes.Blue,
+          algorithm: mode === "light" ? defaultAlgorithm : darkAlgorithm,
+        }}
       >
         {children}
-      </ThemeProvider>
+      </ConfigProvider>
     </ColorModeContext.Provider>
   );
 };

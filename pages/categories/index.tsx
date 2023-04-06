@@ -1,9 +1,9 @@
-import { MuiListInferencer } from "@refinedev/inferencer/mui";
+import { AntdListInferencer } from "@refinedev/inferencer/antd";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export default function CategoryList() {
-  return <MuiListInferencer />;
+  return <AntdListInferencer />;
 }
 
 export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
