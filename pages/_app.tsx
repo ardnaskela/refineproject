@@ -105,7 +105,6 @@ const App = (props: React.PropsWithChildren) => {
 
   return (
     <>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <Refine
